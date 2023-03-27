@@ -11,6 +11,7 @@ const sketch = (p5) => {
   }
 
   p5.draw = () => {
+    p5.background(0)
     generateTerrain(p5)
   }
 
