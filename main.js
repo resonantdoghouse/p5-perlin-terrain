@@ -26,6 +26,7 @@ const p5Sketch = new p5(sketch)
 const terrainSettings = {
   zoom: 0.02,
   elevation: 255,
+  step: 6
 }
 
 const gui = new dat.GUI()
@@ -46,18 +47,25 @@ terrainSettingsFolder
     p5Sketch.redraw()
   })
 
+  terrainSettingsFolder
+  .add(terrainSettings, 'step', 6, 32)
+  .onChange((value) => {
+    terrainSettings.step = value
+    p5Sketch.redraw()
+  })
+
 terrainSettingsFolder.open()
 
 const generateTerrain = (p5) => {
-  const step = 6
+  
   const maxX = window.innerWidth
   const maxY = window.innerHeight
-  const numX = Math.ceil(maxX / step)
-  const numY = Math.ceil(maxY / step)
+  const numX = Math.ceil(maxX / terrainSettings.step)
+  const numY = Math.ceil(maxY / terrainSettings.step)
 
   for (let i = 0; i < numX * numY; i++) {
-    const x = (i % numX) * step
-    const y = Math.floor(i / numX) * step
+    const x = (i % numX) * terrainSettings.step
+    const y = Math.floor(i / numX) * terrainSettings.step
 
     const offsetX = terrainSettings.zoom * x
     const offsetY = terrainSettings.zoom * y
@@ -74,7 +82,7 @@ const generateTerrain = (p5) => {
     } else {
       p5.fill(69, 123, 157) // water
     }
-
+    
     p5.rect(x, y, 10, 10) // draw shape
   }
 }
