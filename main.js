@@ -35,7 +35,7 @@ const gui = new dat.GUI()
 const terrainSettingsFolder = gui.addFolder('Terrain Settings')
 
 terrainSettingsFolder
-  .add(terrainSettings, 'zoom', 0.006, 0.06)
+  .add(terrainSettings, 'zoom', 0.003, 0.09)
   .onChange((value) => {
     terrainSettings.zoom = value
     p5Sketch.redraw()
@@ -49,7 +49,7 @@ terrainSettingsFolder
   })
 
   terrainSettingsFolder
-  .add(terrainSettings, 'step', 6, 32)
+  .add(terrainSettings, 'step', 6, 12)
   .onChange((value) => {
     terrainSettings.step = value
     p5Sketch.redraw()
