@@ -81,13 +81,13 @@ const generateTerrain = (p) => {
 const App = () => {
   const settings = useControls('Terrain Settings', {
     zoom: { value: 0.02, min: 0.003, max: 0.09, step: 0.001 },
-    elevation: { value: 255, min: 80, max: 350, step: 1 },
-    step: { value: 6, min: 6, max: 12, step: 1 }
+    elevation: { value: 255, min: 80, max: 350, step: 1 }
   })
 
   useEffect(() => {
     // Update the shared settings object
-    terrainSettings = settings
+    terrainSettings.zoom = settings.zoom
+    terrainSettings.elevation = settings.elevation
     
     // Trigger redraw if sketch exists
     if (p5SketchInstance) {
